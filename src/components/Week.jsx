@@ -107,7 +107,7 @@ class Week extends Component {
           <React.Fragment>
             <div className="btn-group btn-group-sm" role="group">
               <div className="btn btn-outline-secondary disabled">
-                <span>Debug buttons >>> </span>
+                <span>Debug buttons --- </span>
               </div>
               <button
                 className="btn btn-outline-info btn-sm "
