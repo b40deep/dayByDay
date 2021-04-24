@@ -21,17 +21,22 @@ class Week extends Component {
       if (key === day) {
         let newTaskList = this.state[key];
         newTaskList.push(newTask);
-        temp=Object.fromEntries(new Map([[day, newTaskList]]));
-        console.log("newTaskList>>",newTaskList);
+        temp = Object.fromEntries(new Map([[day, newTaskList]]));
+        console.log("newTaskList>>", newTaskList);
         console.log("temp>>", temp);
         console.log("state>>", this.state);
       }
     }
     // setState
     this.setState(temp);
-    temp=[];
+    temp = [];
     console.log("Week >> Task created successfully!");
   };
+
+  handleDeleteTask = (weekday, taskID) => {
+    console.log(`Task ${taskID} to be deleted from ${weekday} `);
+
+  }
 
   render() {
     return (
@@ -48,6 +53,7 @@ class Week extends Component {
                     daytasks={arrayPair[1]}
                     weekday={arrayPair[0]}
                     onCreateTask={this.handleCreateTask}
+                    onDeleteTask={this.handleDeleteTask}
                   />
                 </li>
               ))}
