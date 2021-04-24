@@ -3,14 +3,15 @@ import React, { Component } from "react";
 class NewTask extends Component {
   submitNewTask = e => {
     // console.log(`"submitted" ${day}`);
-    console.dir(`NewTask>> ${this.props.taskDay} ${this.refs.newTask.value}`);
+    // console.dir(`NewTask>> ${this.props.taskDay} ${this.refs.newTask.value}`);
     this.props.onSubmit(this.props.taskDay, this.refs.newTask.value);
+    document.getElementById("newTaskForm").reset();
     e.preventDefault();
   };
   render() {
     return (
       <li key={this.props.taskKey} className="list-group-item">
-        <form action="" onSubmit={this.submitNewTask}>
+        <form id="newTaskForm" action="" onSubmit={this.submitNewTask}>
           {/* <div className="form-group"> */}
           {/* <label htmlFor="newTask" >Add new task: </label> */}
           <input
