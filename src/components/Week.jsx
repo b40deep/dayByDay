@@ -68,6 +68,7 @@ class Week extends Component {
                 </li>
               ))}
             </ul>
+            <span>NettysAir joined the chat</span>
           </React.Fragment>
         }
       </div>
