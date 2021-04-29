@@ -33,12 +33,28 @@ class Week extends Component {
     console.log("Week >> Task created successfully!");
   };
 
-  handleDeleteTask = (weekday, task) => {
-    console.log(`Task ${task} to be deleted from ${weekday} `);
+  // handleDeleteTask = (weekday, task) => {
+  //   console.log(`Task ${task} to be deleted from ${weekday} `);
+  //   let temp = Object.create({});
+  //   for (var key in this.state) {
+  //     if (key === weekday) {
+  //       let newTaskList = this.state[key].filter(listItem => listItem !== task);
+  //       temp = Object.fromEntries(new Map([[weekday, newTaskList]]));
+  //       console.log(`newTaskListTesting`, newTaskList);
+  //     }
+  //   }
+  //   //setState
+  //   this.setState(temp);
+  //   temp = [];
+  // }  
+  
+  handleDeleteTask = (weekday, task,taskKey) => {
+    console.log(`Task ${task} with key ${taskKey} to be deleted from ${weekday} `);
     let temp = Object.create({});
     for (var key in this.state) {
       if (key === weekday) {
-        let newTaskList = this.state[key].filter(listItem => listItem !== task);
+        let newTaskList = this.state[key];
+        let taskToRemove = newTaskList.splice(taskKey,1);
         temp = Object.fromEntries(new Map([[weekday, newTaskList]]));
         console.log(`newTaskListTesting`, newTaskList);
       }
@@ -68,7 +84,6 @@ class Week extends Component {
                 </li>
               ))}
             </ul>
-            <span>NettysAir joined the chat</span>
           </React.Fragment>
         }
       </div>
