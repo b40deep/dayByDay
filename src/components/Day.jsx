@@ -9,7 +9,8 @@ class Day extends Component {
     const day = this.props.weekday;
     for (let i = 0; i < this.props.daytasks.length; i++) {
       task.push(
-        <li key={this.props.weekday+i} className="list-group-item">
+        <li key={this.props.weekday+i} className="list-group-item ">
+      <input className="m-2" id={this.props.weekday+i} type="checkbox" />
           {this.props.daytasks[i]}
           <button type="button" className="close" aria-label="Close" onClick={() => this.props.onDeleteTask(this.props.weekday, this.props.daytasks[i],i)}>
             <span aria-hidden="true">&times;</span>
