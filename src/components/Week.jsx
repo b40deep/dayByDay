@@ -3,13 +3,13 @@ import Day from "./Day";
 class Week extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {};
   }
 
-  componentDidMount(){
+  componentDidMount() {
     //load saved task list from localStorage
     this.handleReadFromStorage();
-    console.log('cdm successful');
+    console.log("cdm successful");
   }
 
   handleCreateTask = (day, newTask) => {
@@ -30,14 +30,16 @@ class Week extends Component {
     temp = [];
     console.log("WEEK >> Task created successfully!");
   };
-  
-  handleDeleteTask = (weekday, task,taskKey) => {
-    console.log(`Task ${task} with key ${taskKey} to be deleted from ${weekday} `);
+
+  handleDeleteTask = (weekday, task, taskKey) => {
+    console.log(
+      `Task ${task} with key ${taskKey} to be deleted from ${weekday} `
+    );
     let temp = Object.create({});
     for (var key in this.state) {
       if (key === weekday) {
         let newTaskList = this.state[key];
-        newTaskList.splice(taskKey,1);
+        newTaskList.splice(taskKey, 1);
         temp = Object.fromEntries(new Map([[weekday, newTaskList]]));
         console.log(`newTaskListTesting`, newTaskList);
       }
@@ -45,37 +47,47 @@ class Week extends Component {
     //setState
     this.handleWriteToStateAndStorage(temp);
     temp = [];
-  }
+  };
 
-  handleWriteToStateAndStorage = (update) =>{
+  handleWriteToStateAndStorage = (update) => {
     //set the state
     //need to protect state from broken/empty update
-    if (update!==null) this.setState(update);
+    if (update !== null) this.setState(update);
 
     //then write changes to local storage
-    localStorage.setItem('state',JSON.stringify(this.state));
-  }
+    localStorage.setItem("state", JSON.stringify(this.state));
+  };
 
-  handleWriteToStateOnly = (update) =>{
+  handleWriteToStateOnly = (update) => {
     //set the state
     //need to protect state from broken/empty update
-    if (update!==null) this.setState(update);
-  }
+    if (update !== null) this.setState(update);
+  };
 
   handleReadFromStorage() {
-    let fromLocalStorage = JSON.parse(localStorage.getItem('state'));
-    if (fromLocalStorage!==null)this.handleWriteToStateOnly(fromLocalStorage);
+    let fromLocalStorage = JSON.parse(localStorage.getItem("state"));
+    if (fromLocalStorage !== null)
+      this.handleWriteToStateOnly(fromLocalStorage);
     // console.log('FLS________', fromLocalStorage);
-    console.log('ReadFromStorage successful');
+    console.log("ReadFromStorage successful");
   }
 
-handleClearStorage() {
+  handleClearStorage() {
     localStorage.clear();
-    console.log('ClearStorage successful');
+    console.log("ClearStorage successful");
   }
 
-  tempInitStorage(){
-    const tempInit= {
+  handleCompleteTask = (e) => {
+    //which task triggered the checkbox
+    let task = e.target.value;
+    //is it complete or incomplete?
+    let status = e.target.checked;
+    //do something based on answer
+    console.log(`${task} is ${status}`);
+  };
+
+  tempInitStorage() {
+    const tempInit = {
       Monday: ["mon1", "mon2"],
       Tuesday: ["tue1", "tue2"],
       Wednesday: ["wed1", "wed2"],
@@ -84,8 +96,8 @@ handleClearStorage() {
       Saturday: ["sat1", "sat2"],
       Sunday: ["sun1", "sun2"],
     };
-    localStorage.setItem('state',JSON.stringify(tempInit));
-    console.log('InitStorage successful');
+    localStorage.setItem("state", JSON.stringify(tempInit));
+    console.log("InitStorage successful");
   }
 
   render() {
@@ -93,15 +105,39 @@ handleClearStorage() {
       <div className="col">
         {
           <React.Fragment>
-<button className="btn btn-outline-info btn-sm m-2 btn-block" onClick={()=>{this.handleReadFromStorage()}}>Load Tasks</button>
-<button className="btn btn-outline-success btn-sm m-2 btn-block" onClick={()=>{this.tempInitStorage()}}>Save Tasks</button>
-<button className="btn btn-outline-warning btn-sm m-2 btn-block" onClick={()=>{this.handleClearStorage()}}>Clear Tasks</button>
-
-<h1>Week</h1>
+            <div className="btn-group btn-group-sm" role="group">
+              <div className="btn btn-outline-secondary disabled">
+                <span>Debug buttons >>> </span>
+              </div>
+              <button
+                className="btn btn-outline-info btn-sm "
+                onClick={() => {
+                  this.handleReadFromStorage();
+                }}
+              >
+                Load Tasks
+              </button>
+              <button
+                className="btn btn-outline-success btn-sm "
+                onClick={() => {
+                  this.tempInitStorage();
+                }}
+              >
+                Save Tasks
+              </button>
+              <button
+                className="btn btn-outline-warning btn-sm "
+                onClick={() => {
+                  this.handleClearStorage();
+                }}
+              >
+                Clear Tasks
+              </button>
+            </div>
+            <h1>Week</h1>
 
             <ul className="list-group">
               {/* {console.log(Object.entries(this.state))} */}
-
               {Object.entries(this.state).map((arrayPair) => (
                 <li className="list-group-item" key={arrayPair[0]}>
                   <Day
@@ -110,6 +146,7 @@ handleClearStorage() {
                     onCreateTask={this.handleCreateTask}
                     onDeleteTask={this.handleDeleteTask}
                     onLoadTasks={this.handleReadFromStorage}
+                    onCompleteTask={this.handleCompleteTask}
                   />
                 </li>
               ))}
