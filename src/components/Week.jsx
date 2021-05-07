@@ -104,13 +104,13 @@ class Week extends Component {
 
 	tempInitStorage() {
 		const tempInit = {
-			Monday: [ 'mon1', false, 'mon2', false ]
-			//   Tuesday: ["tue1", "tue2"],
-			//   Wednesday: ["wed1", "wed2"],
-			//   Thursday: ["thur1", "thur2"],
-			//   Friday: ["fri1", "fri2"],
-			//   Saturday: ["sat1", "sat2"],
-			//   Sunday: ["sun1", "sun2"],
+			Monday: [ 'mon1', false, 'mon2', false ],
+			Tuesday: [ 'tue1', false, 'tue2', false ],
+			Wednesday: [ 'wed1', false, 'wed2', false ],
+			Thursday: [ 'thur1', false, 'thur2', false ],
+			Friday: [ 'fri1', false, 'fri2', false ],
+			Saturday: [ 'sat1', false, 'sat2', false ],
+			Sunday: [ 'sun1', false, 'sun2', false ]
 		};
 		localStorage.setItem('state', JSON.stringify(tempInit));
 		console.log('InitStorage successful');

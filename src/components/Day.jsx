@@ -6,19 +6,23 @@ class Day extends Component {
 
 	render() {
 		let task = [];
+		let checkedStatus = false;
 		const day = this.props.weekday;
 		for (let i = 0; i < this.props.daytasks.length; i++) {
 			if (i % 2 === 0) {
+				checkedStatus = this.props.daytasks[1 + i] === false ? false : true;
+
 				task.push(
-					<li key={this.props.weekday + i} className="list-group-item py-1">
+					<li key={this.props.weekday + i} className="list-group-item py-1 ">
 						<input
 							type="checkbox"
 							className="m-2"
+							id={i + this.props.weekday}
 							value={i + this.props.weekday}
 							onChange={this.props.onCompleteTask}
-							defaultChecked={false}
+							defaultChecked={checkedStatus}
 						/>
-						{this.props.daytasks[i]}
+						{checkedStatus ? <em> {this.props.daytasks[i]}</em> : this.props.daytasks[i]}
 						<button
 							type="button"
 							className="close"
@@ -29,6 +33,7 @@ class Day extends Component {
 						</button>
 					</li>
 				);
+				checkedStatus = false;
 			}
 		}
 		// console.log(`newTask is ${this.state.newTask}`);
