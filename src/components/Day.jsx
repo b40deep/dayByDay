@@ -20,7 +20,7 @@ class Day extends Component {
 							id={i + this.props.weekday}
 							value={i + this.props.weekday}
 							onChange={this.props.onCompleteTask}
-							defaultChecked={checkedStatus}
+							checked={checkedStatus}
 						/>
 						{checkedStatus ? <em> {this.props.daytasks[i]}</em> : this.props.daytasks[i]}
 						<button
